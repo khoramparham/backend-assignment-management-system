@@ -7,6 +7,8 @@ async function main() {
   const app = express();
   const port = process.env.PORT;
   require("./src/config/mongoose.config");
+  app.use(express.json());
+  app.use(express.urlencoded());
   swaggerConfig(app);
   app.use(mainRouter);
   app.listen(port, () => {
