@@ -24,7 +24,7 @@ class AuthController {
   async checkOtp(req, res, next) {
     try {
       const { mobile, code } = req.body;
-      const token = await this.#service.checkOTP(mobile, code);
+      const token = await this.#service.checkOtp(mobile, code);
       return res
         .cookie(CookieNames.AccessToken, token, {
           httpOnly: true,
