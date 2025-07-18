@@ -1,0 +1,11 @@
+const { Router } = require("express");
+const Authorization = require("../../common/guard/authorization.guard");
+const submissionController = require("./submission.controller");
+const { upload } = require("../../common/utils/multer");
+const router = Router();
+router.post("/add", upload.single("file"), submissionController.add);
+router.get("/:id", Authorization, submissionController.get);
+router.get("/all/:assignmentId", Authorization, submissionController.getAll);
+router.patch("/", upload.single("file"), submissionController.updateByStudent);
+router.patch("/review", Authorization, submissionController.reviewSubmission);
+module.exports = { SubmissionRouter: router };
