@@ -51,8 +51,6 @@ class SubmissionService {
     return submissionUpdate;
   }
   async reviewSubmission({ id, isReviewed, feedback }) {
-    console.log(id);
-
     const submission = await this.checkExistById(id);
     const submissionUpdate = await this.#model.updateOne(
       { _id: submission._id },
