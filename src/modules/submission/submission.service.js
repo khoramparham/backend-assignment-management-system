@@ -10,7 +10,10 @@ class SubmissionService {
     autoBind(this);
     this.#model = SubmissionModel;
   }
-  async add({ submission: { name, phone, studentCode, email, assignmentId }, file }) {
+  async add({
+    submissionValidate: { name, phone, studentCode, email, assignmentId },
+    file,
+  }) {
     const submissionCreate = await this.#model.create({
       student: { name, phone, studentCode, email },
       file: file,

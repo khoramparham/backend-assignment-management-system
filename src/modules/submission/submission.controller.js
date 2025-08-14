@@ -22,10 +22,11 @@ class SubmissionController {
         filename: originalname,
         url: filePath,
       };
-      const submission = await submissionValidationSchema.validateAsync(req.body);
-      await this.#service.add({ submission, file });
+      const submissionValidate = await submissionValidationSchema.validateAsync(req.body);
+      const submission = await this.#service.add({ submissionValidate, file });
       return res.status(httpCode.CREATED).json({
         message: SubmissionMessage.AddSuccessfully,
+        validationCode: submission._id,
       });
     } catch (error) {
       next(error);
