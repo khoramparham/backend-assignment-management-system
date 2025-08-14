@@ -17,7 +17,7 @@ class SubmissionController {
   async add(req, res, next) {
     try {
       const { originalname, path } = req.file;
-      const filePath = Path.join("http://localhost:3000/", path).replace(/\\/g, "/");
+      const filePath = Path.join("http:/localhost:3000/", path).replace(/\\/g, "/");
       const file = {
         filename: originalname,
         url: filePath,
@@ -58,7 +58,7 @@ class SubmissionController {
   async updateByStudent(req, res, next) {
     try {
       const { originalname, path } = req.file;
-      const filePath = Path.join("http://localhost:3000/", path).replace(/\\/g, "/");
+      const filePath = Path.join("http:/localhost:3000/", path).replace(/\\/g, "/");
       const file = {
         filename: originalname,
         url: filePath,
