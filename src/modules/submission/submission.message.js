@@ -5,5 +5,6 @@ const SubmissionMessage = {
   UpdateSuccessfully: "update submission successfully",
   FindSuccessfully: "find submission successfully",
   BadId: "submission id is incorrect",
+  DeadlinePassed: "مهلت ارسال تمرین به پایان رسیده",
 };
 module.exports = SubmissionMessage;

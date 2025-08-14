@@ -3,17 +3,23 @@ const createHttpError = require("http-errors");
 const SubmissionModel = require("./submission.model");
 const { isValidObjectId, Types } = require("mongoose");
 const SubmissionMessage = require("./submission.message");
+const assignmentService = require("../assignment/assignment.service");
 class SubmissionService {
   #model;
-  #assignmentModel;
+  #assignmentService;
   constructor() {
     autoBind(this);
     this.#model = SubmissionModel;
+    this.#assignmentService = assignmentService;
   }
   async add({
     submissionValidate: { name, phone, studentCode, email, assignmentId },
     file,
   }) {
+    const assignment = await this.#assignmentService.getAssignmentByID(assignmentId);
+    if (Date.parse(assignment.dueDate) < Date.now()) {
+      throw new createHttpError.BadRequest(SubmissionMessage.DeadlinePassed);
+    }
     const submissionCreate = await this.#model.create({
       student: { name, phone, studentCode, email },
       file: file,
